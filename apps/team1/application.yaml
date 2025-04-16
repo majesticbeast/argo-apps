@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: team1-resources
-  namespace: argocd
+  namespace: default
   # Optional labels for organization
   labels:
     team: team1
