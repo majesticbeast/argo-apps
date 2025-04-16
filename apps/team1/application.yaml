@@ -14,7 +14,7 @@ spec:
   # Source of the application manifests
   source:
     # This could be the same repo as your root app, or a team-specific repo
-    repoURL: https://github.com/your-org/your-repo.git
+    repoURL: https://github.com/majesticbeast/argo-apps
     targetRevision: HEAD
     # Path within the repo where team1's resources are defined
     path: ./apps/team1/
