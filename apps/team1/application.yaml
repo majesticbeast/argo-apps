@@ -17,7 +17,7 @@ spec:
     repoURL: https://github.com/your-org/your-repo.git
     targetRevision: HEAD
     # Path within the repo where team1's resources are defined
-    path: teams/team1
+    path: apps/team1/
     
     # Optional: directory recursion
     directory:
