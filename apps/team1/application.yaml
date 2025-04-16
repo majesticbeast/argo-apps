@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team1-resources
+  namespace: argocd
+  # Optional labels for organization
+  labels:
+    team: team1
+    environment: dev
+spec:
+  # The project this application belongs to
+  project: default
+  
+  # Source of the application manifests
+  source:
+    # This could be the same repo as your root app, or a team-specific repo
+    repoURL: https://github.com/your-org/your-repo.git
+    targetRevision: HEAD
+    # Path within the repo where team1's resources are defined
+    path: teams/team1
+    
+    # Optional: directory recursion
+    directory:
+      recurse: true
+      
+  # Destination cluster and namespace
+  destination:
+    server: https://kubernetes.default.svc
+    # Namespace where team1's resources will be deployed
+    # Could be team1's dedicated namespace
+    namespace: team1
+    
+  # Sync policy determines how ArgoCD manages this application
+  syncPolicy:
+    automated:
+      prune: true  # Remove resources when they're deleted from Git
+      selfHeal: true  # Fix drift when manually changed in the cluster
+    
+    # Optional: syncOptions for specific behaviors
+    syncOptions:
+      - CreateNamespace=true  # Auto-create the team1 namespace if it doesn't exist
+      - PruneLast=true  # Delete resources last during sync
+      
+  # Ignore differences in specific fields
+  # Useful for resources that have fields managed by controllers
+  ignoreDifferences:
+    - group: "*"
+      kind: "*"
+      jsonPointers:
+        - /status
