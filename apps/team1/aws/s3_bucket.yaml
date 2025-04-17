@@ -1,0 +1,11 @@
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  name: random
+spec:
+  forProvider:
+    objectLockEnabled: true
+    region: us-west-1
+    tags:
+      Name: SampleBucket
+
