@@ -9,6 +9,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
+    directory:
+      recurse: true
     path: crossplane
     repoURL: https://github.com/majesticbeast/argo-apps.git
     targetRevision: HEAD
