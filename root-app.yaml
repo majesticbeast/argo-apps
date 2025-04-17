@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: teams
+    path: apps
     repoURL: https://github.com/majesticbeast/argo-apps.git
     targetRevision: HEAD
   syncPolicy:
