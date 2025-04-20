@@ -16,6 +16,13 @@ spec:
       containers:
         - name: kuard
           image: gcr.io/kuar-demo/kuard-amd64:blue
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
+            limits:
+              cpu: "1000m"
+              memory: "256Mi"
           ports:
             - containerPort: 8080
           livenessProbe:
