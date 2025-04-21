@@ -13,8 +13,15 @@ spec:
       labels:
         app: kuard
     spec:
+      volumes:
+        - name: "kuard-data"
+          hostPath:
+            path: "/var/lib/kuard"
       containers:
         - name: kuard
+          volumeMounts:
+            - mountPath: "/data"
+              name: "kuard-data"
           image: gcr.io/kuar-demo/kuard-amd64:blue
           resources:
             requests:
