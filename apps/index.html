@@ -48,7 +48,8 @@
           // --- CONFIGURATION ---
           // IMPORTANT: Paste your details here.
           const PORTKEY_BEDROCK_VIRTUAL_KEY = "YOUR_BEDROCK_VIRTUAL_KEY"; // <--- PASTE YOUR VIRTUAL KEY HERE
-          const GATEWAY_URL = "http://127.0.0.1:8000"; // <--- PASTE YOUR CUSTOM GATEWAY URL HERE
+          // This should be the URL of your Python FastAPI backend server.
+          const BACKEND_API_URL = "http://127.0.0.1:8000"; // <--- PASTE YOUR BACKEND API URL HERE
 
           // STATE MANAGEMENT
           const [query, setQuery] = React.useState("What were the key announcements from AWS re:Invent 2024 regarding generative AI, and how do they compare to Google's latest offerings?");
@@ -78,7 +79,7 @@
             setActiveTab("report");
 
             try {
-              const response = await fetch(`${GATEWAY_URL}/generate-report`, {
+              const response = await fetch(`${BACKEND_API_URL}/generate-report`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -113,11 +114,11 @@
 
             } catch (e) {
               console.error("Failed to fetch report:", e);
-              setError(`Failed to connect to the backend. Is it running at ${GATEWAY_URL}?`);
+              setError(`Failed to connect to the backend. Is it running at ${BACKEND_API_URL}?`);
             } finally {
               setIsLoading(false);
             }
-          }, [isLoading, query]);
+          }, [isLoading, query, PORTKEY_BEDROCK_VIRTUAL_KEY, BACKEND_API_URL]);
 
 
           // UI RENDERING
