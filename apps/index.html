@@ -45,8 +45,10 @@
 
         // Main Application Component
         function App() {
-          // IMPORTANT: Paste your Bedrock Virtual Key from Portkey here.
-          const PORTKEY_BEDROCK_VIRTUAL_KEY = "YOUR_BEDROCK_VIRTUAL_KEY"; // <--- PASTE YOUR KEY HERE
+          // --- CONFIGURATION ---
+          // IMPORTANT: Paste your details here.
+          const PORTKEY_BEDROCK_VIRTUAL_KEY = "YOUR_BEDROCK_VIRTUAL_KEY"; // <--- PASTE YOUR VIRTUAL KEY HERE
+          const GATEWAY_URL = "http://127.0.0.1:8000"; // <--- PASTE YOUR CUSTOM GATEWAY URL HERE
 
           // STATE MANAGEMENT
           const [query, setQuery] = React.useState("What were the key announcements from AWS re:Invent 2024 regarding generative AI, and how do they compare to Google's latest offerings?");
@@ -63,7 +65,7 @@
             if (isLoading) return;
 
             if (PORTKEY_BEDROCK_VIRTUAL_KEY === "YOUR_BEDROCK_VIRTUAL_KEY") {
-                alert("Please paste your Portkey Virtual Key into the `index.html` file on line 51.");
+                alert("Please paste your Portkey Virtual Key into the `index.html` file.");
                 return;
             }
 
@@ -76,7 +78,7 @@
             setActiveTab("report");
 
             try {
-              const response = await fetch("http://127.0.0.1:8000/generate-report", {
+              const response = await fetch(`${GATEWAY_URL}/generate-report`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -111,7 +113,7 @@
 
             } catch (e) {
               console.error("Failed to fetch report:", e);
-              setError("Failed to connect to the backend. Is it running on http://127.0.0.1:8000?");
+              setError(`Failed to connect to the backend. Is it running at ${GATEWAY_URL}?`);
             } finally {
               setIsLoading(false);
             }
