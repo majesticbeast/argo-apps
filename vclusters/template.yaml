@@ -8,6 +8,8 @@ metadata:
 spec:
   project: default
   source:
+    directory:
+      exclude: 'template.yaml'
     repoURL: https://charts.loft.sh
     chart: vcluster
     targetRevision: 0.19.x
