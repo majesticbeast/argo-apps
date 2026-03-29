@@ -1,17 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: crossplane-application
-  namespace: default
+  name: root-application
+  namespace: argocd
 spec:
   destination:
-    namespace: crossplane-system
+    namespace: default
     server: https://kubernetes.default.svc
   project: default
   source:
-    directory:
-      recurse: true
-    path: crossplane
+    path: apps
     repoURL: https://github.com/majesticbeast/argo-apps.git
     targetRevision: HEAD
   syncPolicy:

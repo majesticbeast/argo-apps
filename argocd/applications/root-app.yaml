@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: root-application
-  namespace: default
+  namespace: argocd
 spec:
   destination:
     namespace: default
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: apps
+    path: argocd/applications
     repoURL: https://github.com/majesticbeast/argo-apps.git
     targetRevision: HEAD
   syncPolicy:
