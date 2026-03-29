@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: vcluster-prs
+  namespace: argocd
+spec:
+  generators:
+    - pullRequest:
+        github:
+          owner: majesticbeast
+          repo: argo-apps
+          appSecretName: repo-226140982
+        requeueAfterSeconds: 60
+  template:
+    metadata:
+      name: 'vcluster-pr-{{number}}'
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: default
+      source:
+        repoURL: https://charts.loft.sh
+        chart: vcluster
+        targetRevision: 0.19.x
+        helm:
+          values: |
+            sync:
+              ingresses:
+                enabled: true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'vcluster-pr-{{number}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
