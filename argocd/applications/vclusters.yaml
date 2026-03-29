@@ -9,7 +9,7 @@ spec:
         github:
           owner: majesticbeast
           repo: argo-apps
-          appSecretName: argocd-repo-creds
+          appSecretName: repo-226140982
         requeueAfterSeconds: 60
   template:
     metadata:
